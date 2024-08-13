@@ -6,10 +6,9 @@ public class Main{
 
         int N = sc.nextInt();
 
-        for(int i = N; ; i--){
+        for(int i = N; i >= 1 ; i--){
             System.out.println(i);
-            if (i==1)
-                break;
+       
         }
         sc.close();
     }
