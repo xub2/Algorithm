@@ -14,17 +14,11 @@ public class Main{
         }
 
         for(int i = 0 ; i < whiteChess.length; i++){
-            if(whiteChess[i] == whiteChessInput[i]){
-                System.out.println(0);
-            }
-            else{
-                System.out.println(whiteChess[i] - whiteChessInput[i]);
-            }
+            System.out.println(whiteChess[i] - whiteChessInput[i]);
         }
             
 
         sc.close();
-
 
     }
 }
