@@ -17,13 +17,9 @@ public class Main{
             if(whiteChess[i] == whiteChessInput[i]){
                 System.out.println(0);
             }
-            else if(whiteChess[i] > whiteChessInput[i]){
+            else{
                 System.out.println(whiteChess[i] - whiteChessInput[i]);
             }
-            else if(whiteChess[i] < whiteChessInput[i]){
-                System.out.println(whiteChess[i] - whiteChessInput[i]);
-            }
-        }
 
         sc.close();
 
