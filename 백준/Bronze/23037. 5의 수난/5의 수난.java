@@ -1,29 +1,28 @@
 import java.util.Scanner;
-import java.lang.Math;
 
-public class Main{
-    public static void main(String[] args){
+public class Main {
+
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        final int N = sc.nextInt();
+        String input = sc.next();
+        String[] array = input.split("");
 
-        int man = N / 10000;
-        man = (int) Math.pow(man,5);
+        int[] answerArray = new int[array.length];
 
-        int chun = (N % 10000) / 1000;
-        chun = (int) Math.pow(chun,5);
+        long sum = 0;
 
-        int baek = ((N % 10000) % 1000) / 100;
-        baek = (int) Math.pow(baek,5);
+        for (int i = 0; i < array.length; i++) {
+            answerArray[i] = Integer.parseInt(array[i]);
+        }
 
-        int sip = (((N % 10000) % 1000) % 100) / 10 ;
-        sip = (int) Math.pow(sip,5);
+        for (int i = 0; i < answerArray.length; i++) {
+            answerArray[i] = (int) Math.pow(answerArray[i], 5);
+            sum += answerArray[i];
+        }
 
-        int il = (((N % 10000) % 1000) % 100) % 10;
-        il = (int) Math.pow(il,5);
-
-        System.out.print(man+chun+baek+sip+il);
-
+        System.out.println(sum);
 
     }
+
 }
