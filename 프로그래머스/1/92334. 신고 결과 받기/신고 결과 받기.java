@@ -1,78 +1,78 @@
 import java.util.*;
 
 class Solution {
-    public int[] solution(String[] id_list, String[] report, int k) { 
-        
+    public int[] solution(String[] id_list, String[] report, int k) {
+
         int[] finalResult = new int[id_list.length];
-        
+
         // 인원 만큼 정답 map 만들기
         Map<String, Set<String>> resultMap = new LinkedHashMap<>();
-        for(String s: id_list){
+        for (String s : id_list) {
             resultMap.put(s, new LinkedHashSet<String>());
         }
         // 채우기 OK
-        
+
         // 유저별 신고당한 횟수 0 으로 초기화
-        Map<String, Integer> reportCountMap = new LinkedHashMap<>();
-        for(String s : id_list){
+        Map<String, Integer> reportCountMap = new HashMap<>();
+        for (String s : id_list) {
             reportCountMap.put(s, 0);
         }
-        
+
         // 중복 신고 거르기
-        Set<String> verifyDuplicatedReport = new LinkedHashSet<>();
-        
-        for(String s: report){
-            verifyDuplicatedReport.add(s);
-        }
-        
-        
-        for(String log : verifyDuplicatedReport){
+        Set<String> verifyDuplicatedReport = new HashSet<>();
+        Collections.addAll(verifyDuplicatedReport, report);
+
+
+        for (String log : verifyDuplicatedReport) {
             //"muzi frodo" -> muzi가 frodo 신고
             String[] splitReportLog = log.split(" ");
             String reporter = splitReportLog[0]; // 신고자
             String reported = splitReportLog[1]; // 신고 당한 인원
-            
+
             // 유저가 누구 신고 했는지 기록
             // muzi : [frodo]
             resultMap.get(reporter).add(reported);
-            
+
             // 신고당한 횟수 업데이트
             // frodo : 1
             // 중복 신고 로직 어케 처리함?
             reportCountMap.put(reported, reportCountMap.get(reported) + 1);
-            
+
         }
-        
+
         // 이 시점에 신고당한 횟수 정리 끝
-        
+
         // 정지 대상 인원 이름 리스트
         Set<String> banTargetUser = new LinkedHashSet<>();
-        // k 번 이상 신고 당했으면 정지 대상 인원 리스트에 추가
-        for(String key : reportCountMap.keySet()){
-            if(reportCountMap.get(key) >= k){
+        // k 번 이상 신고 당했으면 정지 대상 인원 셋에 추가
+        for (String key : reportCountMap.keySet()) {
+            if (reportCountMap.get(key) >= k) {
                 banTargetUser.add(key);
             }
         }
-        
-        
-        if(banTargetUser.isEmpty()){
+
+        // 밴할 유저 없으면 걍 리턴
+        if (banTargetUser.isEmpty()) {
             return new int[id_list.length];
         }
-        
-        
+
+
         for (int i = 0; i < id_list.length; i++) {
-    String reporter = id_list[i];
-    Set<String> myReportList = resultMap.get(reporter);
-    
-    int mailCount = 0;
-    for (String reportedUser : myReportList) {
-        if (banTargetUser.contains(reportedUser)) {
-            mailCount++;
+            String reporter = id_list[i]; //신고자 : muzi
+            
+            Set<String> myReportList = resultMap.get(reporter); // muzi의 신고 인원
+
+            int mailCount = 0;
+            
+            for (String reportedUser : myReportList) { // muzi의 신고 리스트에서 하나씩 꺼냄
+                if (banTargetUser.contains(reportedUser)) { // 만약 꺼낸 유저가 밴 목록에 있다 ? -> 그러면 받을 메일 수 증가
+                    mailCount++;
+                }
+            }
+
+            finalResult[i] = mailCount; // 받을 메일 수 등록
         }
-    }
-    finalResult[i] = mailCount;
-}
-        
+
         return finalResult;
     }
 }
