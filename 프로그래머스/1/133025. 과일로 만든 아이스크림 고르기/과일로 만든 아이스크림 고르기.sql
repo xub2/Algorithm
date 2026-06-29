@@ -1,0 +1,7 @@
+-- 코드를 입력하세요
+-- 총 주문량이 3000 보다 높다 && 주 성분이 과일인 아이스크림 맛
+-- 총 주문량이 큰 순서대로 조회 (DESC)
+SELECT F.FLAVOR
+FROM FIRST_HALF F JOIN ICECREAM_INFO I ON F.FLAVOR = I.FLAVOR
+WHERE F.TOTAL_ORDER > 3000 AND I.INGREDIENT_TYPE = 'fruit_based'
+ORDER BY F.TOTAL_ORDER DESC
