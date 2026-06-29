@@ -1,7 +1,5 @@
 -- 코드를 입력하세요
-SELECT  (SELECT ROUND(AVG(DAILY_FEE),0)
-                                                FROM CAR_RENTAL_COMPANY_CAR
-                                                WHERE CAR_TYPE = 'SUV') AS AVERAGE_FEE
+-- 자동차 종류가 SUV인 자동차 / 평균 일일 대여 요금 AVG()
+SELECT FLOOR(SUM(DAILY_FEE) / COUNT(*)) AS AVERAGE_FEE
 FROM CAR_RENTAL_COMPANY_CAR
 WHERE CAR_TYPE = 'SUV'
-GROUP BY CAR_TYPE;
