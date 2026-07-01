@@ -1,0 +1,10 @@
+-- 아직 입양 못간 동물 중
+-- 가장 오래 보호소에 있었던 동물 3마리
+
+-- 입양 못갔다 -> IN에는 있는데 OUT에는 없는 친구들
+-- 그 친구 들의 datetime 기준으로 정렬
+SELECT AI.NAME, AI.DATETIME
+FROM ANIMAL_INS AI LEFT JOIN ANIMAL_OUTS AO ON AI.ANIMAL_ID = AO.ANIMAL_ID
+WHERE AO.DATETIME IS NULL
+ORDER BY AI.DATETIME
+FETCH FIRST 3 ROWS ONLY
