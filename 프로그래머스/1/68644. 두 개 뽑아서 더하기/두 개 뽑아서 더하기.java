@@ -6,15 +6,20 @@ class Solution {
         Set<Integer> set = new HashSet<>();
         
         for(int i = 0 ; i < numbers.length; i++){
-            for(int j = i + 1; j < numbers.length; j++){
+            for(int j = i + 1 ; j < numbers.length; j++){
                 set.add(numbers[i] + numbers[j]);
             }
         }
         
-        int[] answer = set.stream().mapToInt(integer -> integer).toArray();
-        Arrays.sort(answer);
+        List<Integer> list = new ArrayList<>();
+        for(Integer i : set){
+            list.add(i);
+        }
         
-        return answer;
+        int[] array = list.stream().mapToInt(i -> i).toArray();
         
+        Arrays.sort(array);
+        
+        return array;
     }
 }
